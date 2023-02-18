@@ -12,16 +12,26 @@ void render();
 #define FPS 30
 #define FRAME_TARGET_TIME (1000/FPS)
 int last_frame_time=0;
-int player_speed_x =5;
-int player_speed_y =5;
 bool game_running=false;
-int player_x=20;
-int player_y=20;
+
+//int player_speed_x =5;
+//int player_speed_y =5;
+//int player_x=20;
+//int player_y=20;
+
+struct {
+    int x = 20 ;
+    int y = 20 ;
+} player;
+
+struct{
+    int x = 5 ;
+    int y = 5 ; 
+} player_speed;
+
 SDL_Event sdl_event;
 SDL_Window* window;
 SDL_Renderer* renderer;
-
-
 
 
 int main(int argc, char** argv)
@@ -107,15 +117,15 @@ void update()
     if (time_to_wait > 0 && time_to_wait <= FRAME_TARGET_TIME)
         SDL_Delay( time_to_wait);
 
-    if (player_x > 640 - 10 || player_x < 0) {
-        player_speed_x = -player_speed_x;
+    if (player.x > 640 - 10 || player.x < 0) {
+        player_speed.x = -player_speed.x;
     }
-    if (player_y > 400 - 10 || player_y < 0) {
-        player_speed_y = -player_speed_y;
+    if (player.y > 400 - 10 || player.y < 0) {
+        player_speed.y = -player_speed.y;
     }
 
-    player_x += player_speed_x;
-    player_y += player_speed_y;
+    player.x += player_speed.x;
+    player.y += player_speed.y;
 
     last_frame_time = SDL_GetTicks();
 
@@ -125,7 +135,7 @@ void render()
     SDL_SetRenderDrawColor(renderer,30,30,30,255);
     SDL_RenderClear(renderer);
 
-    SDL_Rect box = {player_x, player_y, 10,10};
+    SDL_Rect box = {player.x, player.y, 10,10};
     SDL_SetRenderDrawColor(renderer,255,255,255,255);
     SDL_RenderFillRect(renderer, &box);
 
