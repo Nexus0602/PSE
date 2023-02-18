@@ -2,25 +2,35 @@
 #include <stdbool.h>
 #include <SDL2/SDL.h>
 
+#define FPS 20
+#define FRAME_TARGET_TIME (1000/FPS)
+
 void destroy();
 bool graphicsinitialization(int width, int height);
 void process_input(bool *game_is_running);
 void update();
 void render();
-
-
-#define FPS 20
-#define FRAME_TARGET_TIME (1000/FPS)
 int last_frame_time=0;
-int speed_x = 120;
-int speed_y = 120;
 bool game_running=false;
-int player_x=20;
-int player_y=20;
+
+//int speed_x = 120;
+//int speed_y = 120;
+//int player_x=20;
+//int player_y=20;
+
+struct {
+    int x = 20 ;
+    int y = 20 ;
+} player;
+
+struct{
+    int x = 120 ;
+    int y = 120 ; 
+} speed;
+
 SDL_Event sdl_event;
 SDL_Window* window;
 SDL_Renderer* renderer;
-
 
 int main(int argc, char** argv)
 {
@@ -34,8 +44,6 @@ int main(int argc, char** argv)
     destroy();
     return 0;
 }
-
-
 
 void destroy()
 {
@@ -98,6 +106,7 @@ void process_input(bool *game_is_running)
     }
 
 }
+
 void update()
 {
     int delta_time_ms =  (SDL_GetTicks() - last_frame_time);
@@ -105,25 +114,26 @@ void update()
     float delta_time = delta_time_ms / 1000.0f;
     //std::cout << delta_time ;
 
-    if (player_x > 640 - 10 || player_x < 0) {
-        speed_x = -speed_x;
+    if (player.x > 640 - 10 || player.x < 0) {
+        speed.x = -speed.x;
     }
-    if (player_y > 400 - 10 || player_y < 0) {
-        speed_y = -speed_y;
+    if (player.y > 400 - 10 || player.y < 0) {
+        speed.y = -speed.y;
     }
 
-    player_x += speed_x * delta_time;
-    player_y += speed_y * delta_time;
+    player.x += speed.x * delta_time;
+    player.y += speed.y * delta_time;
 
     last_frame_time = SDL_GetTicks();
 
 }
+
 void render()
 {
     SDL_SetRenderDrawColor(renderer,30,30,30,255);
     SDL_RenderClear(renderer);
 
-    SDL_Rect box = {player_x, player_y, 10,10};
+    SDL_Rect box = {player.x, player.y, 10,10};
     SDL_SetRenderDrawColor(renderer,255,255,255,255);
     SDL_RenderFillRect(renderer, &box);
 
