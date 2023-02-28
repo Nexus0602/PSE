@@ -2,47 +2,36 @@
 #include <stdbool.h>
 #include <SDL2/SDL.h>
 
-/** 
- * @brief 
- * Function declaration
- */
+#define FPS 20
+#define FRAME_TARGET_TIME (1000/FPS)
+
 void destroy();
 bool graphicsinitialization(int width, int height);
 void process_input(bool *game_is_running);
 void update();
 void render();
+int last_frame_time=0;
 bool game_running=false;
 
+//int speed_x = 120;
+//int speed_y = 120;
 //int player_x=20;
 //int player_y=20;
-//int dx = 1;
-//int dy = 1;
 
-/** 
- * @brief 
- * Global variables
- */
 struct {
     int x = 20 ;
     int y = 20 ;
 } player;
 
 struct{
-    int x = 1 ;
-    int y = 1 ; 
-} d;
+    int x = 120 ;
+    int y = 120 ; 
+} speed;
 
 SDL_Event sdl_event;
 SDL_Window* window;
 SDL_Renderer* renderer;
 
-/** 
- * @brief 
- * Main
- * @param argc 
- * @param argv 
- * @return int 
- */
 int main(int argc, char** argv)
 {
     game_running = graphicsinitialization(640,400);
@@ -56,11 +45,6 @@ int main(int argc, char** argv)
     return 0;
 }
 
-/** 
- * @brief 
- * Destroy function
- * Destroys renderer and window
- */
 void destroy()
 {
     SDL_DestroyRenderer(renderer);
@@ -68,16 +52,6 @@ void destroy()
     SDL_Quit();
     std::cout << "Graphichs destroyed" << std::endl;
 }
-
-/**
- * @brief 
- * Graphic initialization function
- * Creates window and renderer
- * @param width 
- * @param height 
- * @return true 
- * @return false 
- */
 bool graphicsinitialization(int width, int height)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) !=0)
@@ -117,12 +91,6 @@ bool graphicsinitialization(int width, int height)
     return true;
 }
 
-/**
- * @brief 
- * Process input function
- * Processes the user input
- * @param game_is_running 
- */
 void process_input(bool *game_is_running)
 {
     SDL_PollEvent(&sdl_event);
@@ -139,28 +107,27 @@ void process_input(bool *game_is_running)
 
 }
 
-/**
- * @brief 
- * Update function
- * Updates player position (both x and y)
- */
 void update()
 {
+    int delta_time_ms =  (SDL_GetTicks() - last_frame_time);
+
+    float delta_time = delta_time_ms / 1000.0f;
+    //std::cout << delta_time ;
+
     if (player.x > 640 - 10 || player.x < 0) {
-        d.x = -d.x;
+        speed.x = -speed.x;
     }
     if (player.y > 400 - 10 || player.y < 0) {
-        d.y = -d.y;
+        speed.y = -speed.y;
     }
-    player.x += d.x;
-    player.y += d.y;
+
+    player.x += speed.x * delta_time;
+    player.y += speed.y * delta_time;
+
+    last_frame_time = SDL_GetTicks();
+
 }
 
-/**
- * @brief
- * Render function
- * Defines and updates variables related to render
- */
 void render()
 {
     SDL_SetRenderDrawColor(renderer,30,30,30,255);
