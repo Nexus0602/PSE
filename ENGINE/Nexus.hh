@@ -28,6 +28,7 @@ class Nexus {
     void Start();
     bool NextFrame();
     void CheckInput();
+    Vec2 CheckMousePos();
     void Update();
     void Render();
     double GetDeltaTime(int *lft);
