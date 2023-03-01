@@ -33,6 +33,13 @@ void Nexus::Update(){
     CheckInput();
 }
 
+Vec2 Nexus::CheckMousePos(){
+    
+    int x,y;
+    SDL_GetMouseState(&x,&y);
+    return Vec2(x,y);
+}
+
 void Nexus::CheckInput(){
     SDL_Event event;
     while (SDL_PollEvent(&event)){
@@ -97,10 +104,12 @@ double Nexus::GetDeltaTime(int *last_frame_time){
 }
 
 int Nexus::GetTotalTimeInMilliSeconds(){
+    // hacer
     return 0;
 }
 
 double Nexus::GetTotalTimeInSeconds(){
+    // hacer
     return 0.0;
 }
 
