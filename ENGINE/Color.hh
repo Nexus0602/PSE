@@ -31,7 +31,10 @@ struct Color{
     static Color White();
     static Color Black();
 
-    friend std::ostream& operator<<(std::ostream& os, const Color& c);
+    friend std::ostream& operator<<(std::ostream& os, const Color& c){
+        os << c << std::endl; 
+    return os;
+    }
 };
 
 #endif // __COLOR_H__

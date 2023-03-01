@@ -117,6 +117,14 @@ void Nexus::DrawRect(int x, int y, int width, int height, Color color){
     Graphics::DrawRect(x,y,width,height,color);
 }
 
+void Nexus::DrawFillRect(int x, int y, int width, int height, Color color){
+    Graphics::DrawFillRect(x,y,width,height,color);
+}
+
 void Nexus::DrawCircle(int x, int y, int radius, Color color, float angle){
     Graphics::DrawCircle(x,y,radius,color,angle);
+}
+
+void Nexus::DrawFillCircle(int x, int y, int radius, Color color){
+    Graphics::DrawFillCircle(x,y,radius,color);
 }

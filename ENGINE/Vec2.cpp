@@ -100,6 +100,12 @@ float Vec2::Cross(const Vec2& v) const{
 
 // OPERADORES
 
+Vec2& Vec2::operator= (const Vec2& v){
+    x = v.x;
+    y = v.y;
+    return *this;
+}
+
 bool Vec2::operator==(const Vec2& v) const{
     if (x == v.x && y == v.y)
         return true;
@@ -138,5 +144,7 @@ Vec2& Vec2::operator /= (const float n){
     return *this;
 
 }
+
+
 
 
