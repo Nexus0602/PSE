@@ -7,6 +7,8 @@
 #include "Vec2.hh"
 #include <iostream>
 #include <stdbool.h>
+#include "ECS/Components/Transform.hh"
+#include "entt/entt.hpp"
 
 class Nexus {
     private:
@@ -35,5 +37,8 @@ class Nexus {
     int GetTotalTimeInMilliSeconds();
     double GetTotalTimeInSeconds();
     void DrawRect(int x, int y, int width, int height, Color color);
+    void DrawFillRect(int x, int y, int width, int height, Color color);
     void DrawCircle(int x, int y, int radius, Color color, float angle);
+    void DrawFillCircle(int x, int y, int radius, Color color);
+
 };
