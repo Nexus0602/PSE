@@ -34,6 +34,8 @@ float Cross(const Vec2& v) const;
 
 static Vec2 Lerp(Vec2 a, Vec2 b, float t);
 
+static Vec2 FromModuleAngle(float module, float angle);
+
 friend std::ostream& operator<<(std::ostream& os, const Vec2& v){
     os << "(" << v.x << ", " << v.y << ")"; 
     return os;

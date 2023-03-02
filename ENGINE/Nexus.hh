@@ -41,4 +41,6 @@ class Nexus {
     void DrawCircle(int x, int y, int radius, Color color, float angle);
     void DrawFillCircle(int x, int y, int radius, Color color);
 
+    //EnTT (ECS)
+    entt::registry world;
 };
