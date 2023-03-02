@@ -32,6 +32,6 @@ struct Color{
     static Color Black();
 
     friend std::ostream& operator<<(std::ostream& os, const Color& c);
-};
+
 
 #endif // __COLOR_H__

@@ -3,6 +3,7 @@
 
 #include "Vec2.hh"
 
+
 struct TransformComponent {
     Vec2 position;
     double rotation;
@@ -17,3 +18,4 @@ struct TransformComponent {
 };
 
 #endif // __TRANSFORM_H__
+

@@ -3,7 +3,9 @@
 #include <iostream>
 #include <cmath>
 
+
 using namespace std;
+
 
 Vec2::Vec2() : x(0.0), y(0.0) {}
 
@@ -91,9 +93,11 @@ Vec2 Vec2::Normal() const{
 }
 
 float Vec2::Dot(const Vec2& v) const{
+
     float a = this->x;
     float b = this->y;
     return (a * v.x + b * v.y);
+
 
 }
 float Vec2::Cross(const Vec2& v) const{
@@ -105,7 +109,6 @@ Vec2 Vec2::FromModuleAngle(float module, float angle) {
 
         return Vec2(module * cos(angle), module * sin(angle));
 }
-
 
 // OPERADORES
 

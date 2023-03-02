@@ -14,6 +14,7 @@ Color::Color(uint32_t color){
 
 }
 
+
 Color Color::Lerp(Color color_1, Color color_2, float t){
 
     float r = (1.0f - t) * color_1.r + t * color_2.r;
@@ -24,7 +25,6 @@ Color Color::Lerp(Color color_1, Color color_2, float t){
     return Color(r, g, b, a);
 
 }
-
 
 Color Color::Red(){
     return Color(255,0,0);
