@@ -1,7 +1,7 @@
 #ifndef _TRANSFORM_H_
 #define _TRANSFORM_H_
 
-#include "ENGINE/Vec2.hh"
+#include "Vec2.hh"
 
 struct TransformComponent {
     Vec2 position;
