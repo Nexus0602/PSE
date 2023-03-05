@@ -39,7 +39,7 @@ int main(int argc, char** argv){
         Vec2 normal_direction = direction.UnitVec();
         Vec2 normal_enemy = enemy.position.UnitVec();
 
-        if (normal_direction.Dot(normal_direction) >= 0){
+        if (normal_direction.Dot(normal_enemy) >= 0){
             enemy.position += normal_direction * constant_speed;
 
         }
