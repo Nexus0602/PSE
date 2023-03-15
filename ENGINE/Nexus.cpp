@@ -1,6 +1,9 @@
 #include "Nexus.hh"
 
 Nexus::Nexus(int width, int height){
+
+    this->width = width;
+    this->height = height;
     Logger::Info("Nexus constructor called.");
 
     //Setting core variables
@@ -25,12 +28,16 @@ void Nexus::Start(){
 bool Nexus::NextFrame(){
     Graphics::CleanUpScreen();
     dt = (SDL_GetTicks() - last_frame_time) / 1000.0f;
+    //dt = Nexus::GetDeltaTime(&last_frame_time);
     last_frame_time = SDL_GetTicks();
     return running;
 }
 
 void Nexus::Update(){
     CheckInput();
+
+    //Systems
+    kinematicSystem.Update(dt,world);
 }
 
 Vec2 Nexus::CheckMousePos(){
@@ -71,7 +78,7 @@ void Nexus::CheckInput(){
             if (event.key.keysym.sym == SDLK_DOWN)
                 running = true;
 
-            // ... entiendo que hay que implementar mas 
+            // ...
 
             break;
 
@@ -95,10 +102,9 @@ void Nexus::Render(){
 }
 
 double Nexus::GetDeltaTime(int *last_frame_time){
-    int delta_time_ms =  (SDL_GetTicks() - *last_frame_time);
-    double delta_time = delta_time_ms / 1000.0f;
+    dt = (SDL_GetTicks() - *last_frame_time) / 1000.0f;
     *last_frame_time = SDL_GetTicks();
-    return delta_time;
+    return dt;
 
 
 }

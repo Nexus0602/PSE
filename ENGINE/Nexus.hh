@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include "ECS/Components/Transform.hh"
 #include "entt/entt.hpp"
+#include "ECS/Systems/KinematicSystem.hh"
 
 class Nexus {
     private:
@@ -19,6 +20,7 @@ class Nexus {
     int last_frame_time = 0; // ms
 
     public:
+    int width, height;
     Nexus(int width, int height);
     ~Nexus();
 
@@ -44,4 +46,6 @@ class Nexus {
     //EnTT (ECS)
     entt::registry world;
 
+    //Systems
+    KinematicSystem kinematicSystem;
 };

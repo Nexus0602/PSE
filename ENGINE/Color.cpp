@@ -2,7 +2,12 @@
 
 Color::Color(){}
 
-Color::Color(int r, int g, int b) : r(r), g(g), b(b){}
+//Color::Color(int r, int g, int b) : r(r), g(g), b(b){}
+Color::Color(int r, int g, int b) {
+    this->r = r;
+    this->g = g;
+    this-> b = b;
+}
 
 Color::Color(int r, int g, int b, int a) : r(r), g(g), b(b), a(a){}
 
@@ -11,9 +16,7 @@ Color::Color(uint32_t color){
     g = (color >> 8) & 0xFF;
     b = (color >> 16) & 0xFF;
     a = (color >> 24) & 0xFF;
-
 }
-
 
 Color Color::Lerp(Color color_1, Color color_2, float t){
 
@@ -24,6 +27,10 @@ Color Color::Lerp(Color color_1, Color color_2, float t){
 
     return Color(r, g, b, a);
 
+}
+
+Color Color::color(int r, int g, int b){
+    return Color(r,g,b);
 }
 
 Color Color::Red(){
