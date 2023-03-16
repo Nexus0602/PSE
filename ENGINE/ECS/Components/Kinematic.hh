@@ -1,7 +1,3 @@
-#ifndef _KINEMATIC_H_
-#define _KINEMATIC_H_
-
-#include "Vec2.hh"
 
 struct KinematicComponent {
     Vec2 velocity;
@@ -15,4 +11,3 @@ struct KinematicComponent {
     
 };
 
-#endif // _KINEMATIC_H_
