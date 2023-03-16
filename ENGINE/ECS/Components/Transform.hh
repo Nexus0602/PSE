@@ -1,9 +1,3 @@
-#ifndef _TRANSFORM_H_
-#define _TRANSFORM_H_
-
-#include "Vec2.hh"
-
-
 struct TransformComponent {
     Vec2 position;
     double rotation;
@@ -17,5 +11,4 @@ struct TransformComponent {
     }
 };
 
-#endif // __TRANSFORM_H__
 
