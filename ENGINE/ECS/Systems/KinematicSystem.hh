@@ -1,7 +1,3 @@
-#include "./../Components/Transform.hh"
-#include "./../Components/Kinematic.hh"
-
-
 class KinematicSystem{
     public:
 
