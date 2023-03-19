@@ -38,6 +38,8 @@ void Nexus::Update(){
 
     //Systems
     kinematicSystem.Update(dt,world);
+    particleSystem.Update(dt,world);
+
 }
 
 Vec2 Nexus::CheckMousePos(){
@@ -98,6 +100,8 @@ void Nexus::CheckInput(){
 
 void Nexus::Render(){
 
+    particleSystem.Render(world);
+    
     Graphics::RenderFrame();
 }
 
