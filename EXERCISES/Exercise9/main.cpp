@@ -8,26 +8,36 @@ int main(int argc, char *args[]){
 
     const auto ball = engine.world.create();
 
-    engine.world.emplace<TransformComponent>(ball, Vec2(0.0,height/4));
-    
+    engine.world.emplace<TransformComponent>(ball, Vec2(0.0,height/4)); //el resto de atributos por defecto
+    //engine.world.emplace<TransformComponent>(ball, Vec2(2*width/3,height/4));
+
     engine.world.emplace<KinematicComponent>(ball, Vec2(100, -200), Vec2 (0,100));
-    //engine.world.emplace<KinematicComponent>(ball, Vec2(50, 100), Vec2 (0,100)); // Yvel = 0 --> the ball keeps on the floor
+    
+    //engine.world.emplace<KinematicComponent>(ball, Vec2(50, 100), Vec2 (0,100)); // Yvel >0 --> the ball keeps on the floor
     //engine.world.emplace<KinematicComponent>(ball, Vec2(50, -100), Vec2 (0,100));
-    //engine.world.emplace<KinematicComponent>(ball, Vec2(200, -300), Vec2 (0,100)); // reaches the top boundary
+    //engine.world.emplace<KinematicComponent>(ball, Vec2(130, -220), Vec2 (0,100)); // reaches the top boundary
     //engine.world.emplace<KinematicComponent>(ball, Vec2(150, -80), Vec2 (0,100));
-    //engine.world.emplace<KinematicComponent>(ball, Vec2(80, -50), Vec2 (0,100));
-    //engine.world.emplace<KinematicComponent>(ball, Vec2(-80, -50), Vec2 (0,100)); // doesnt apper --> it goes to the left
+    //engine.world.emplace<KinematicComponent>(ball, Vec2(-80, -50), Vec2 (0,100)); // it goes to the left
+    //engine.world.emplace<KinematicComponent>(ball, Vec2(-80, -200), Vec2 (0,100)); // doesnt appear --> it goes to the left
+
 
     while (engine.NextFrame()){
         engine.Update();
 
         // Check world boundaries
         auto transform = engine.world.get<TransformComponent>(ball);
+        // bottom
         if(transform.position.y > 3*height/4 - 100)
         transform.position.y = 3*height/4 - 100;
-
+        //top
+        if(transform.position.y < 0)
+        transform.position.y = 0;
+        //right
         if(transform.position.x > width)
         transform.position.x = width;
+        //left
+        if (transform.position.x < 0)
+        transform.position.x = 0;
 
         Color color_sky_blue= Color::color(179,237,252);
         Color color_grass_green = Color::color(11,99,23);
