@@ -7,9 +7,17 @@
 #include "Vec2.hh"
 #include <iostream>
 #include <stdbool.h>
+
+#include "entt/entt.hpp" //no tocar, siempre antes que ECS
+
 #include "ECS/Components/Transform.hh"
-#include "entt/entt.hpp"
+#include "ECS/Components/Kinematic.hh"
+#include "ECS/Components/Particle.hh"
+
 #include "ECS/Systems/KinematicSystem.hh"
+#include "ECS/Systems/ParticleSystem.hh"
+
+
 
 class Nexus {
     private:
@@ -48,4 +56,5 @@ class Nexus {
 
     //Systems
     KinematicSystem kinematicSystem;
+    ParticleSystem particleSystem;
 };
