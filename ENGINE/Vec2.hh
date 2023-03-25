@@ -58,7 +58,9 @@ Vec2 operator / (const float n) const{
     return Vec2(x / n, y / n);
 
 }
-Vec2 operator - (); //? convertir a negativo?? 
+Vec2 operator - (){
+    return Vec2(-x, -y);
+}
 
 Vec2& operator += (const Vec2& v);
 Vec2& operator -= (const Vec2& v);

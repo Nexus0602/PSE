@@ -68,7 +68,7 @@ void Graphics::DrawRect(int x, int y, int width, int height, Color color)
     SDL_RenderDrawRect(renderer, &box);
 }
 
-void Graphics::DrawCircle(int x0, int y0, int radius, Color color, float angle)
+void Graphics::DrawCircle(int x0, int y0, int radius, Color color, float angle = 0.0)
 {
 
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
@@ -152,4 +152,36 @@ SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 SDL_Rect box = {x - width / 2, y - height / 2, width, height};
 SDL_RenderDrawRect(renderer, &box);
 SDL_RenderFillRect(renderer, &box);
+}
+
+void Graphics::DrawGrid(int cell_size){
+//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+SDL_RenderClear(renderer);
+SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+        int grid_size = 10; // tamaño de cuadrícula
+
+        for (int i = 0; i <= grid_size; i++) {
+            // línea vertical
+            SDL_RenderDrawLine(renderer, i * cell_size, 0, i * cell_size, cell_size * grid_size);
+            // línea horizontal
+            SDL_RenderDrawLine(renderer, 0, i * cell_size, cell_size * grid_size, i * cell_size);
+        }
+
+}
+
+void Graphics::DrawPolygon(int x, int y, const std::vector<Vec2>& vertices, Color color){
+
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+
+    // Crear un array de SDL_Point con los vértices del polígono
+    std::vector<SDL_Point> points;
+    for (const auto& vertex : vertices) {
+        points.push_back({x + static_cast<int>(vertex.x),
+                        y + static_cast<int>(vertex.y)});
+    }
+
+    // Dibujar el polígono
+    SDL_RenderDrawLines(renderer, &points[0], points.size());
+    SDL_RenderDrawLine(renderer,points[points.size()-1].x,points[points.size()-1].y, points[0].x,points[0].y);
 }

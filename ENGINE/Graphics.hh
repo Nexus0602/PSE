@@ -20,6 +20,6 @@ class Graphics {
     static void DrawFillCircle(int x, int y, int radius, Color color);
     static void DrawRect(int x, int y, int width, int height, Color color);
     static void DrawFillRect(int x, int y, int width, int height, Color color);
-    static void DrawGrid(void);
+    static void DrawGrid(int);
     static void DrawPolygon(int x, int y, const std::vector<Vec2>& vertices, Color color);
 };

@@ -56,7 +56,7 @@ float Vec2::MagnitudeSquared() const{
 }
 float Vec2::Angle(){
     //angulo vector respecto eje horizontal
-    return atan2(y,x) * 180.0 / M_PI;
+    return atan2f(y,x);// * 180.0 / M_PI;
 }
 
 float Vec2::AngleBetween(const Vec2& v){
@@ -154,6 +154,7 @@ Vec2& Vec2::operator /= (const float n){
     return *this;
 
 }
+
 
 
 

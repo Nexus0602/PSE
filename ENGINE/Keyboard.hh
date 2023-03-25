@@ -9,4 +9,4 @@ struct Keyboard{
     bool rightKeyPressed = false;
 
 };
-#endif // __MOUSE_H__
+#endif //

@@ -39,6 +39,9 @@ void Nexus::Update(){
     //Systems
     kinematicSystem.Update(dt,world);
     particleSystem.Update(dt,world);
+    dragAndDropSystem.Update(world);
+    rigidBodySystem.Update(dt,world);
+    
 
 }
 
@@ -75,10 +78,14 @@ void Nexus::CheckInput(){
             case SDL_KEYDOWN:
             if (event.key.keysym.sym == SDLK_ESCAPE)
                 running = false;
-            if (event.key.keysym.sym == SDLK_UP)
+            if (event.key.keysym.sym == SDLK_UP){
                 running = true;
-            if (event.key.keysym.sym == SDLK_DOWN)
+                keyboard->upKeyPressed = true;
+                }
+            if (event.key.keysym.sym == SDLK_DOWN){
                 running = true;
+                keyboard->downKeyPressed = true;
+                }
 
             // ...
 
@@ -101,6 +108,7 @@ void Nexus::CheckInput(){
 void Nexus::Render(){
 
     particleSystem.Render(world);
+    rigidBodySystem.Render(world);
     
     Graphics::RenderFrame();
 }

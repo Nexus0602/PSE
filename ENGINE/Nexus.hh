@@ -5,6 +5,7 @@
 #include "Logger.hh"
 #include "Graphics.hh"
 #include "Vec2.hh"
+#include "Force.hh"
 #include <iostream>
 #include <stdbool.h>
 
@@ -13,10 +14,17 @@
 #include "ECS/Components/Transform.hh"
 #include "ECS/Components/Kinematic.hh"
 #include "ECS/Components/Particle.hh"
+#include "ECS/Components/DragAndDrop.hh"
+#include "ECS/Components/Shape.hh"
+#include "ECS/Components/CircleShape.hh"
+#include "ECS/Components/PolygonShape.hh"
+#include "ECS/Components/RectangleShape.hh"
+#include "ECS/Components/RigidBody.hh"
 
 #include "ECS/Systems/KinematicSystem.hh"
 #include "ECS/Systems/ParticleSystem.hh"
-
+#include "ECS/Systems/DragAndDropSystem.hh"
+#include "ECS/Systems/RigidBodySystem.hh"
 
 
 class Nexus {
@@ -57,4 +65,6 @@ class Nexus {
     //Systems
     KinematicSystem kinematicSystem;
     ParticleSystem particleSystem;
+    DragAndDropImpulseSystem dragAndDropSystem;
+    RigidBodySystem rigidBodySystem;
 };
