@@ -34,16 +34,16 @@ struct RectangleShape: public PolygonShape{
 
     }
 
-    Shape* Clone() const {
+    Shape* Clone() const override{
 
         return new RectangleShape(width,height,color,filled);
 
     }
-    ShapeType GetType()const{
+    ShapeType GetType()const override {
 
         return RECTANGLE;
     }
-    float GetMomentOfInertia() const {
+    float GetMomentOfInertia() const override{
         return (0.083333)*(width*width+height*height);
     }
 
@@ -67,7 +67,7 @@ struct RectangleShape: public PolygonShape{
             );
     }
 
-    void UpdateVertices(double rotation, Vec2 position) const{
+    void UpdateVertices(double rotation, Vec2 position) const override{
         // Actualizar los vértices locales
 
         Vec2 center(0.0f, 0.0f);

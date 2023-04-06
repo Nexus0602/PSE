@@ -155,9 +155,11 @@ SDL_RenderFillRect(renderer, &box);
 }
 
 void Graphics::DrawGrid(int cell_size){
-//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-SDL_RenderClear(renderer);
-SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Establecer color de fondo a negro
+    SDL_RenderClear(renderer); // Limpiar pantalla con el color de fondo
+
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Establecer color de línea a blanco
+
 
         int grid_size = 10; // tamaño de cuadrícula
 

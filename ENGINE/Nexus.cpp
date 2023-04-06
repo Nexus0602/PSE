@@ -14,6 +14,9 @@ Nexus::Nexus(int width, int height){
     //Graphics initialization
     if (Graphics::OpenWindow(width,height))
         Logger::Info("Graphics initialized");
+
+    eventBus.sink<KeyDownEvent>().connect<&GridMovementSystem::OnKeyDown>(gridMovementSystem);
+    eventBus.sink<KeyDownEvent>().connect<&SpawnSystem::OnKeyDown>(spawnSystem);
     running = true;
 }
 
@@ -76,8 +79,12 @@ void Nexus::CheckInput(){
             mouse->rightButtonPressed = true;
             break;
             case SDL_KEYDOWN:
+            eventBus.trigger(KeyDownEvent(event.key.keysym.sym, world));
             if (event.key.keysym.sym == SDLK_ESCAPE)
                 running = false;
+            break;
+            
+            /*
             if (event.key.keysym.sym == SDLK_UP){
                 running = true;
                 keyboard->upKeyPressed = true;
@@ -85,7 +92,7 @@ void Nexus::CheckInput(){
             if (event.key.keysym.sym == SDLK_DOWN){
                 running = true;
                 keyboard->downKeyPressed = true;
-                }
+                }*/
 
             // ...
 
