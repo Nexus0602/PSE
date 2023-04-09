@@ -120,17 +120,17 @@ void Nexus::Render(){
     Graphics::RenderFrame();
 }
 
-double Nexus::GetDeltaTime(int *last_frame_time){
-    dt = (SDL_GetTicks() - *last_frame_time) / 1000.0f;
-    *last_frame_time = SDL_GetTicks();
+double Nexus::GetDeltaTime(){
+    dt = (SDL_GetTicks() - last_frame_time) / 1000.0f;
+    last_frame_time = SDL_GetTicks();
     return dt;
 
 
 }
 
 int Nexus::GetTotalTimeInMilliSeconds(){
-    // hacer
-    return 0;
+    
+    return (SDL_GetTicks() - initial_time)/1000.0f ;
 }
 
 double Nexus::GetTotalTimeInSeconds(){

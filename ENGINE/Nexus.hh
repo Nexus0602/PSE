@@ -39,6 +39,7 @@ class Nexus {
     bool running = false;
     double dt = 0;
     int last_frame_time = 0; // ms
+    int initial_time = SDL_GetTicks();
 
     public:
     int width, height;
@@ -56,7 +57,7 @@ class Nexus {
     Vec2 CheckMousePos();
     void Update();
     void Render();
-    double GetDeltaTime(int *lft);
+    double GetDeltaTime();
     int GetTotalTimeInMilliSeconds();
     double GetTotalTimeInSeconds();
     void DrawRect(int x, int y, int width, int height, Color color);
