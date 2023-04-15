@@ -155,6 +155,10 @@ Vec2& Vec2::operator /= (const float n){
 
 }
 
+Vec2 Vec2::Perpendicular() const {
+    return Vec2(-y, x);
+}
+
 
 
 

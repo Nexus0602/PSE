@@ -52,6 +52,7 @@ void Graphics::CleanUpScreen()
 
 void Graphics::RenderFrame()
 {
+    //std::cout<<"hola"<<std::endl;
     SDL_RenderPresent(renderer);
 }
 
@@ -173,6 +174,8 @@ void Graphics::DrawGrid(int cell_size){
 }
 
 void Graphics::DrawPolygon(int x, int y, const std::vector<Vec2>& vertices, Color color){
+
+    //std::cout<<"RENDER"<<std::endl;
 
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 

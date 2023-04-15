@@ -12,6 +12,7 @@
 #include "entt/entt.hpp" //no tocar, siempre antes que ECS
 
 #include "Events/KeyDownEvent.hh"
+#include "Events/CollisionEvent.hh"
 
 #include "ECS/Components/Transform.hh"
 #include "ECS/Components/Kinematic.hh"
@@ -24,6 +25,9 @@
 #include "ECS/Components/RigidBody.hh"
 #include "ECS/Components/GridMovement.hh"
 #include "ECS/Components/NameGroup.hh"
+#include "Collisions.hh"
+#include "ECS/Components/Collider.hh"
+#include "ECS/Components/Health.hh"
 
 #include "ECS/Systems/KinematicSystem.hh"
 #include "ECS/Systems/ParticleSystem.hh"
@@ -31,6 +35,8 @@
 #include "ECS/Systems/RigidBodySystem.hh"
 #include "ECS/Systems/GridMovementSystem.hh"
 #include "ECS/Systems/SpawnSystem.hh"
+#include "ECS/Systems/CollisionSystem.hh"
+#include "ECS/Systems/DamageSystem.hh"
 
 class Nexus {
     private:
@@ -67,7 +73,7 @@ class Nexus {
 
     //EnTT (ECS)
     entt::registry world;
-    entt::dispatcher eventBus;
+    entt::dispatcher eventBus; 
 
     //Systems
     KinematicSystem kinematicSystem;
@@ -76,4 +82,6 @@ class Nexus {
     RigidBodySystem rigidBodySystem;
     GridMovementSystem gridMovementSystem;
     SpawnSystem spawnSystem;
+    CollisionSystem collisionSystem;
+    DamageSystem damageSystem;
 };

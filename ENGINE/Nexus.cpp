@@ -16,7 +16,9 @@ Nexus::Nexus(int width, int height){
         Logger::Info("Graphics initialized");
 
     eventBus.sink<KeyDownEvent>().connect<&GridMovementSystem::OnKeyDown>(gridMovementSystem);
-    eventBus.sink<KeyDownEvent>().connect<&SpawnSystem::OnKeyDown>(spawnSystem);
+    //eventBus.sink<KeyDownEvent>().connect<&SpawnSystem::OnKeyDown>(spawnSystem);
+    eventBus.sink<CollisionEvent>().connect<&CollisionSystem::OnCollision>(collisionSystem);
+    eventBus.sink<CollisionEvent>().connect<&DamageSystem::OnCollision>(damageSystem);
     running = true;
 }
 
@@ -44,7 +46,7 @@ void Nexus::Update(){
     particleSystem.Update(dt,world);
     dragAndDropSystem.Update(world);
     rigidBodySystem.Update(dt,world);
-    
+    collisionSystem.Update(eventBus, world);
 
 }
 
@@ -116,7 +118,7 @@ void Nexus::Render(){
 
     particleSystem.Render(world);
     rigidBodySystem.Render(world);
-    
+    collisionSystem.Render(world);
     Graphics::RenderFrame();
 }
 

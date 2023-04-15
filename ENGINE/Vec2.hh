@@ -28,6 +28,7 @@ float AngleBetween(const Vec2& v);
 Vec2& Normalize();
 Vec2 UnitVec() const;
 Vec2 Normal() const;
+Vec2 Perpendicular() const;
 
 float Dot(const Vec2& v) const;
 float Cross(const Vec2& v) const;
