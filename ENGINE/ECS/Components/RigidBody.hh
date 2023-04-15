@@ -4,6 +4,7 @@ float mass;
 float invMass;
 float I;
 float invI;
+float restitution = 0;
 
 //Forces and torques
 Vec2 sumForces;
@@ -84,7 +85,8 @@ void ClearTorques()
 }
 
 bool IsStatic(){
-    return (invMass == 0.0f);
+    const float epsilon = 0.005f;
+    return fabs(invMass - 0.0) < epsilon;
 }
 
 };

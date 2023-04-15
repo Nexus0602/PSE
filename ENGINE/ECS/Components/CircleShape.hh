@@ -40,6 +40,10 @@ struct CircleShape:public Shape{
             );
     }
 
+    float GetRadius(){
+        return this->radius;
+    }
+
 
 
 };

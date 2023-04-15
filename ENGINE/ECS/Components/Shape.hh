@@ -13,6 +13,7 @@ struct Shape{
     virtual ShapeType GetType() const=0;
     virtual float GetMomentOfInertia() const=0;
     virtual void Render(TransformComponent transform) const =0;
+    //virtual float GetRadius() const = 0;
     
 
 };
