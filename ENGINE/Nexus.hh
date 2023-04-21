@@ -1,3 +1,5 @@
+#include <sol/sol.hpp> 
+
 #include "Mouse.hh"
 #include "Keyboard.hh"
 #include "Color.hh"
@@ -28,6 +30,8 @@
 #include "Collisions.hh"
 #include "ECS/Components/Collider.hh"
 #include "ECS/Components/Health.hh"
+//#include "ECS/Components/Script.hh"
+//#include "ECS/Components/Entity.hh"
 
 #include "ECS/Systems/KinematicSystem.hh"
 #include "ECS/Systems/ParticleSystem.hh"
@@ -37,6 +41,8 @@
 #include "ECS/Systems/SpawnSystem.hh"
 #include "ECS/Systems/CollisionSystem.hh"
 #include "ECS/Systems/DamageSystem.hh"
+//#include "ECS/Systems/ScriptSystem.hh"
+//#include "SetupScene.hh"
 
 class Nexus {
     private:
