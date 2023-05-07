@@ -1,4 +1,6 @@
 #include "Nexus.hh"
+#include <filesystem>
+
 
 Nexus::Nexus(int width, int height){
 
@@ -17,8 +19,22 @@ Nexus::Nexus(int width, int height){
 
     eventBus.sink<KeyDownEvent>().connect<&GridMovementSystem::OnKeyDown>(gridMovementSystem);
     //eventBus.sink<KeyDownEvent>().connect<&SpawnSystem::OnKeyDown>(spawnSystem);
-    eventBus.sink<CollisionEvent>().connect<&CollisionSystem::OnCollision>(collisionSystem);
+    //eventBus.sink<CollisionEvent>().connect<&CollisionSystem::OnCollision>(collisionSystem);
     eventBus.sink<CollisionEvent>().connect<&DamageSystem::OnCollision>(damageSystem);
+
+
+    //Adding assets to the manager
+    
+    //Graphics::Addtexture("snoopy","./assets/png/sn.png");
+    Graphics::Addtexture("tree","./../../ENGINE/assets/png/arbol.png");
+    //Graphics::Addtexture("fire","./../../ENGINE/assets/png/fire.jpeg");
+    //Graphics::Addtexture("frog","./../../ENGINE/assets/png/frog.png");
+    Graphics::Addtexture("coin","./../../ENGINE/assets/png/coin.png");
+    Graphics::Addtexture("dog","./../../ENGINE/assets/png/dog.png");
+    Graphics::Addtexture("cat","./../../ENGINE/assets/png/cat.png");
+    Graphics::Addtexture("gato","./../../ENGINE/assets/png/gato.png");
+
+
     running = true;
 }
 
@@ -119,6 +135,8 @@ void Nexus::Render(){
     particleSystem.Render(world);
     rigidBodySystem.Render(world);
     collisionSystem.Render(world);
+    spriteSystem.Render(world);
+    animationSystem.Render(world);
     Graphics::RenderFrame();
 }
 
