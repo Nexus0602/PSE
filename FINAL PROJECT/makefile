@@ -1,0 +1,11 @@
+OBJS= main.cpp 
+ENGINE_SOURCE_FILES = ./ENGINE/*.cpp 
+OBJ_NAME = main
+CPP=g++
+INCLUDE_PATHS = -I./ENGINE -I/usr/local/include -D_THREAD_SAFE
+LIBRARY_PATHS =
+COMPILER_FLAGS = -std=c++17 -Wall
+LINKER_FLAGS = -L/usr/local/lib -L./ENGINE -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+
+build:
+	$(CPP) $(OBJS) $(ENGINE_SOURCE_FILES) $(INCLUDE_PATHS) $(LIBRARY_PATHS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
