@@ -1,4 +1,5 @@
-
+/* WHEN A COLLISION HAPPENS, AN EVENT IS TRIGGERED AND THE DAMAGE SYSTEM LISTENS TO THE EVENT */
+/* DEPENDING ON THE ENTITIES INVOVLED IN THE COLLISION THE RESULT WILL CHANGE */
 class DamageSystem {
 public:
 
@@ -11,27 +12,36 @@ void OnCollision (CollisionEvent& event){
     auto& groupA = event.world->get<NameGroupComponent>(entityA);
     auto& groupB = event.world->get<NameGroupComponent>(entityB);
 
-        if (groupA.group == "enemies" && groupB.group == "enemies") {
-            //std::cout << "Enemy hit enemy" << std::endl;
-        }
+    /* IF A CAR HITS THE FROG: 
+                - Frog's health updated
+                - Frog's score updated
+                - Frog's position updated
+                - Sound effect played
+                */
 
-        else if (groupA.group == "player" && groupB.group == "enemies"){
+        if (groupA.group == "player" && groupB.group == "enemies"){
             auto& sound = event.world->get<SoundComponent>(entityB);
             sound.shouldPlay = true;
             auto& health = event.world->get<HealthComponent>(entityA);
             auto& score = event.world->get<ScoreComponent>(entityA);
             health.health -= 1;
             score.score -= 100;
-            std::cout << "Enemy hit player. Lives: " << health.health << " Score : " << score.score << std::endl;
             auto& transformA = event.world->get<TransformComponent>(entityA);
             transformA.position = Vec2(350,825);
             
+            /* IF FROG'S HEALTH = 0:
+                        - Grid component removed
+                        - Frog's position updated
+                        */
             if (health.health <= 0) {
                 auto& transformA = event.world->get<TransformComponent>(entityA);
                 transformA.position = Vec2(550,850);
                 score.score = 0;
                 event.world->remove<GridMovementComponent>(entityA);
                 std::cout << "Player killed. Score: "<< score.score<< std::endl;
+            }
+            else {            
+                std::cout << "A car hit the frog. Lives: " << health.health << " Score : " << score.score << std::endl;
             }
 
         }
@@ -43,7 +53,6 @@ void OnCollision (CollisionEvent& event){
             auto& score = event.world->get<ScoreComponent>(entityA);
             health.health -= 1;
             score.score -= 100;
-            std::cout << "Enemy hit player. Lives: " << health.health << " Score : " << score.score << std::endl;
             auto& transformA = event.world->get<TransformComponent>(entityA);
             transformA.position = Vec2(350,825);
             
@@ -54,17 +63,20 @@ void OnCollision (CollisionEvent& event){
                 event.world->remove<GridMovementComponent>(entityA);
                 std::cout << "Player killed. Score: "<< score.score<< std::endl;
             }
-
+            else {            
+                std::cout << "A car hit the frog. Lives: " << health.health << " Score : " << score.score << std::endl;
+            }
         }
 
+        /* IF THE FROG COLLIDES WITH A WATERLILY: the frog's velocity becomes the same as the waterlily */
         else if (groupA.group == "player" && groupB.group == "amigos"){
             auto& kinematicA = event.world->get<KinematicComponent>(entityA);
             auto& kinematicB = event.world->get<KinematicComponent>(entityB);
-
             kinematicA.velocity=kinematicB.velocity;
 
         }
 
+        /* IF THE FROG COLLIDES WITH A SCENARIO: the frog's velocity becomes 0 */
         else if (groupA.group == "player" && groupB.group == "scenarios"){
             //std::cout<<"ESCENARIO"<<std::endl;
             auto& kinematicA = event.world->get<KinematicComponent>(entityA);
@@ -72,15 +84,19 @@ void OnCollision (CollisionEvent& event){
 
         }
 
+        /* IF THE FROG FALLS INTO THE RIVER :
+                - Frog's health updated
+                - Frog's score updated
+                - Frog's position updated
+                - Sound effect played
+                    */
         else if (groupA.group == "player" && groupB.group == "water"){
-            //std::cout<<"WATER"<<std::endl;
             auto& sound = event.world->get<SoundComponent>(entityB);
             sound.shouldPlay = true;
             auto& health = event.world->get<HealthComponent>(entityA);
             auto& score = event.world->get<ScoreComponent>(entityA);
             health.health -= 1;
             score.score -= 100;
-            std::cout << "The frog fell into the river. Lives: " << health.health << " Score : " << score.score << std::endl;
             auto& transformA = event.world->get<TransformComponent>(entityA);
             transformA.position = Vec2(350,375);
             
@@ -90,6 +106,9 @@ void OnCollision (CollisionEvent& event){
                 score.score = 0;
                 std::cout << "Player killed. Score: "<< score.score<< std::endl;
                 event.world->remove<GridMovementComponent>(entityA);
+            }
+            else{
+            std::cout << "The frog fell into the river. Lives: " << health.health << " Score : " << score.score << std::endl;
             }
             
 

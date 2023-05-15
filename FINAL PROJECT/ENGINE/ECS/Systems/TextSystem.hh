@@ -15,7 +15,6 @@ public:
         {
             // Manejar error de renderización de texto
             SDL_Log("Error al renderizar texto: %s", TTF_GetError());
-            // Puedes agregar cualquier manejo de errores adicional aquí
         }
         else
         {
@@ -26,7 +25,6 @@ public:
             {
                 // Manejar error de creación de textura
                 SDL_Log("Error al crear textura de texto: %s", SDL_GetError());
-                // Puedes agregar cualquier manejo de errores adicional aquí
             }
             else
             {

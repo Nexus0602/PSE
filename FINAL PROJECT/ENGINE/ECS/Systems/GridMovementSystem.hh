@@ -22,7 +22,6 @@ class GridMovementSystem {
                 break;
             }
 
-            //si health <= 0 --> tranform += 0;
             transform.position += direction * grid.stepSize;
         }
     }

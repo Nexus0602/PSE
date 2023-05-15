@@ -1,3 +1,5 @@
+/* ALLOWS CREATING ANIMATIONS FROM AN ARRAY OF SPRITES */
+
 class AnimationSystem{
 
     public:

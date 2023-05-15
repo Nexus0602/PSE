@@ -1,8 +1,10 @@
+/* MANAGE HEALTH AND SCORE; MOREOVER, STORES IF THE PLAYER HAS WON */
+
 struct HealthComponent {
     int health;
     int maxHealth;
     
-    HealthComponent(int h = 100) : health(h), maxHealth(h) {}
+    HealthComponent(int h = 1000) : health(h), maxHealth(h) {}
 };
 
 struct ScoreComponent {

@@ -16,6 +16,8 @@ class KinematicSystem{
             kinematic.velocity += kinematic.acceleration * dt;
             transform.position += kinematic.velocity * dt;
 
+            /* BOUNDARY CHECK: depeding on the kind of entity and part of the scenario*/
+            /* Code that controls that the cars appear again when they dissapear (in a "natural" way)*/
             if (n.group == "enemies"){
             if (transform.position.x + 50<= 0 && kinematic.velocity.x < 0)
                 transform.position.x  = width + 50;
@@ -24,18 +26,19 @@ class KinematicSystem{
                 transform.position.x  = -50;
             }
 
+            /* Code that controls that the water and the waterlilies appear again when they dissapear (in a "natural" way)*/
             if (n.group == "amigos" ||n.group == "water" ){
-            //if (transform.position.x + 25<= 0 && kinematic.velocity.x < 0)
-                //transform.position.x  = width + 25;
 
             if (transform.position.x - 25 >= width && kinematic.velocity.x > 0)
                 transform.position.x  = -25;
             }
 
+            /* Code that controls that the frog is not able to go outside the window*/
             if (n.group == "player"){
-
+                /*If the frog is in the river and goes on a waterlily it appears again*/
                 if (transform.position.x - 25 >= width  && transform.position.y <= 325 && transform.position.y > 100 )
                     transform.position.x = -25;
+
                 else if (transform.position.x >= width) {
                     transform.position.x = width - 25 ;
 

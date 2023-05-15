@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include <string>
 
-// Componente de texto
+/* ALLOWS RENDERING TEXT IN THE GAME WINDOW */
 struct TextComponent
 {
     std::string text;
