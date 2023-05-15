@@ -3,15 +3,21 @@
 #include <iostream>
 #include <stdbool.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+#include <map>
 
 SDL_Window *Graphics::window = NULL;
 SDL_Renderer *Graphics::renderer = NULL;
+
 int Graphics::windowWidth, Graphics::windowHeight = 0;
+static std::map<std::string, SDL_Texture*> textures;
 
 bool Graphics::OpenWindow(int width, int height)
 {
     windowWidth = width;
     windowHeight = height;
+
 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -32,6 +38,11 @@ bool Graphics::OpenWindow(int width, int height)
         Logger::Error("Error creating SDL renderer.");
         return false;
     }
+    if ( TTF_Init() < 0 ) {
+        std::cout << "Error intializing SDL_ttf: " << TTF_GetError() << std::endl;
+        return false;
+    }
+
     return true;
 }
 
@@ -39,6 +50,8 @@ void Graphics::CloseWindow()
 {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    Graphics::ClearAssets();
+    TTF_Quit();
     SDL_Quit();
     Logger::Info("Graphics terminated.");
 }
@@ -161,7 +174,7 @@ void Graphics::DrawGrid(int cell_size){
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Establecer color de línea a blanco
 
 
-        int grid_size = 20; // tamaño de cuadrícula
+        int grid_size = 10; // tamaño de cuadrícula
 
         for (int i = 0; i <= grid_size; i++) {
             // línea vertical
@@ -173,6 +186,7 @@ void Graphics::DrawGrid(int cell_size){
 }
 
 void Graphics::DrawPolygon(int x, int y, const std::vector<Vec2>& vertices, Color color){
+
 
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 
@@ -187,3 +201,55 @@ void Graphics::DrawPolygon(int x, int y, const std::vector<Vec2>& vertices, Colo
     SDL_RenderDrawLines(renderer, &points[0], points.size());
     SDL_RenderDrawLine(renderer,points[points.size()-1].x,points[points.size()-1].y, points[0].x,points[0].y);
 }
+
+void Graphics::DrawSprite(SDL_Texture* texture, Vec2 position, Vec2 scale, int width, int height, float rotation, SDL_Rect _srcRect ){
+    SDL_Rect srcRect = _srcRect;
+
+    SDL_Rect dstRect = {
+        static_cast<int>(position.x - width * scale.x * 0.5),
+        static_cast<int>(position.y - height * scale.y * 0.5),
+        static_cast<int>(width*scale.x),
+        static_cast<int>(height*scale.y)
+    };
+
+
+    if (SDL_RenderCopyEx(renderer,texture,&srcRect,&dstRect,rotation,NULL,SDL_FLIP_NONE)!=0){
+        std::cout << "Error rendering sprite " << SDL_GetError()<<std::endl;
+    }
+}
+
+void Graphics::ClearAssets(){
+
+    for (auto texture: textures) {
+        SDL_DestroyTexture(texture.second);
+    }
+    textures.clear();
+
+}
+
+
+void Graphics::Addtexture(const std::string& assetId, const std::string& filePath) {
+    SDL_Surface* surface = IMG_Load(filePath.c_str());
+    if (surface == nullptr) {
+        std::cout << "IMG_Load Error: " << IMG_GetError() << std::endl;
+    }
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer,surface);
+    if (texture == nullptr) {
+        std::cout << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << std::endl;
+    }
+    SDL_FreeSurface(surface);
+
+    textures.emplace(assetId, texture);
+
+    Logger::Info("Texture added whith id " + assetId);
+
+}
+
+SDL_Texture* Graphics::GetTexture(const std::string& assetId){
+
+    return textures[assetId];
+
+}
+
+
+
