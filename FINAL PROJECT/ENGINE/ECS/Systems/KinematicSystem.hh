@@ -13,24 +13,32 @@ class KinematicSystem{
             
 
             //Semi-implicit euler --> linear motion
-            kinematic.velocity += kinematic.acceleration * dt;
+            kinematic.velocity += kinematic.acceleration * dt ;
             transform.position += kinematic.velocity * dt;
 
             /* BOUNDARY CHECK: depeding on the kind of entity and part of the scenario*/
             /* Code that controls that the cars appear again when they dissapear (in a "natural" way)*/
             if (n.group == "enemies"){
-            if (transform.position.x + 50<= 0 && kinematic.velocity.x < 0)
-                transform.position.x  = width + 50;
+                if (kinematic.velocity.x < 0) {
+                    kinematic.velocity.x -= 0.1;
+                    if (transform.position.x + 50<= 0 )
+                        transform.position.x  = width + 50;
+                }
 
-            if (transform.position.x - 50 >= width && kinematic.velocity.x > 0)
-                transform.position.x  = -50;
-            }
-
+                if (kinematic.velocity.x > 0) {
+                    kinematic.velocity.x += 0.05;
+                    if (transform.position.x - 50 >= width )
+                        transform.position.x = -50 ;
+                }
+                }
+            
             /* Code that controls that the water and the waterlilies appear again when they dissapear (in a "natural" way)*/
             if (n.group == "amigos" ||n.group == "water" ){
 
-            if (transform.position.x - 25 >= width && kinematic.velocity.x > 0)
+            if (transform.position.x - 25 >= width)
                 transform.position.x  = -25;
+                kinematic.velocity.x += 0.1;
+
             }
 
             /* Code that controls that the frog is not able to go outside the window*/
