@@ -48,11 +48,10 @@
 class Nexus {
     private:
     // Game loop
-    bool debug = false;
+    //bool debug = false;
     bool running = false;
     double dt = 0;
     int last_frame_time = 0; // ms
-    int initial_time = SDL_GetTicks();
 
     public:
     int width, height;

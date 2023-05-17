@@ -1,4 +1,5 @@
 #include "Nexus.hh"
+#include <cmath>
 
 Nexus::Nexus(int width, int height){
 
@@ -138,10 +139,12 @@ double Nexus::GetDeltaTime(){
     dt = (SDL_GetTicks() - last_frame_time) / 1000.0f;
     last_frame_time = SDL_GetTicks();
     return dt;
+    
 }
 
 int Nexus::GetTotalTimeInMilliSeconds(){
-    return (SDL_GetTicks() - initial_time)/1000.0f ;
-}
+    int initial_time = 1000;
+    return (SDL_GetTicks()- initial_time)/100.0;
 
+}
 
